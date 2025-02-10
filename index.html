@@ -136,7 +136,7 @@
             let hash = await sha256(inputPassword);
 
             
-            let storedHash = "a3a43f53d97113b8d05519ed5b395b385f47cdcfcc4aab22d049248af9d9e0b8"; // 'password' in SHA-256
+            let storedHash = "$argon2id$v=19$m=65536,t=3,p=4$Gq/rAjN40npMBblROfHSlA$UnjwNm59tjFkC/ty/BTfsdqHktyhhwLct1O3pTNNfLE"; // 'password' in SHA-256
 
             
             if (hash === storedHash) {

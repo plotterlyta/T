@@ -132,16 +132,16 @@
         async function login() {
             let inputPassword = document.getElementById("passwordInput").value;
 
-            // Hash the entered password using SHA-256
+            
             let hash = await sha256(inputPassword);
 
-            // Stored hashed password (Replace with your actual hashed password)
+            
             let storedHash = "a3a43f53d97113b8d05519ed5b395b385f47cdcfcc4aab22d049248af9d9e0b8"; // 'password' in SHA-256
 
-            // Compare the hashes
+            
             if (hash === storedHash) {
                 alert("Login Successful!");
-                window.location.href = "dashboard.html"; // Redirect after login
+            
             } else {
                 document.getElementById("message").innerText = "Incorrect Password!";
             }

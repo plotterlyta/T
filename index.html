@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Protected Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            background-color: #f4f4f4;
+            text-align: center;
+            animation: colorChange 10s infinite;
+        }
+        .container {
+            height: 300px;
+            background: grey;
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .submit {
+            border-radius: 10px;
+            margin-left: 12px;
+            border-color: transparent;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+        input, button, h2, p {
+            padding: 10px;
+            margin-top: 10px;
+            width: 100%;
+            height: 30px;
+            border-radius: 10px;
+            text-align: centre;
+            border-color: transparent 
+        }
+        button {
+            height: 50px;
+            background-color: black;
+            font-size: 17px;
+        }
+        
+        /* Text Animation */
+        @keyframes colorChange {
+            0% { color: red; }
+            1.56% { color: blue; }
+            3.12% { color: green; }
+            4.68% { color: orange; }
+            6.25% { color: purple; }
+            7.81% { color: pink; }
+            9.37% { color: cyan; }
+            10.93% { color: lime; }
+            12.5% { color: yellow; }
+            14.06% { color: magenta; }
+            15.62% { color: teal; }
+            17.18% { color: brown; }
+            18.75% { color: coral; }
+            20.31% { color: violet; }
+            21.87% { color: gold; }
+            23.43% { color: navy; }
+            25% { color: olive; }
+            26.56% { color: indigo; }
+            28.12% { color: salmon; }
+            29.68% { color: hotpink; }
+            31.25% { color: darkgreen; }
+            32.81% { color: chocolate; }
+            34.37% { color: dodgerblue; }
+            35.93% { color: skyblue; }
+            37.5% { color: firebrick; }
+            39.06% { color: lavender; }
+            40.62% { color: maroon; }
+            42.18% { color: lightseagreen; }
+            43.75% { color: sandybrown; }
+            45.31% { color: sienna; }
+            46.87% { color: slateblue; }
+            48.43% { color: tomato; }
+            50% { color: turquoise; }
+            51.56% { color: yellowgreen; }
+            53.12% { color: azure; }
+            54.68% { color: beige; }
+            56.25% { color: darkblue; }
+            57.81% { color: darkorange; }
+            59.37% { color: forestgreen; }
+            60.93% { color: gainsboro; }
+            62.5% { color: honeydew; }
+            64.06% { color: khaki; }
+            65.62% { color: lawngreen; }
+            67.18% { color: lemonchiffon; }
+            68.75% { color: lightcoral; }
+            70.31% { color: mediumpurple; }
+            71.87% { color: mediumvioletred; }
+            73.43% { color: mintcream; }
+            75% { color: mistyrose; }
+            76.56% { color: moccasin; }
+            78.12% { color: orchid; }
+            79.68% { color: palevioletred; }
+            81.25% { color: peru; }
+            82.81% { color: plum; }
+            84.37% { color: seagreen; }
+            85.93% { color: slategray; }
+            87.5% { color: steelblue; }
+            89.06% { color: thistle; }
+            90.62% { color: wheat; }
+            92.18% { color: whitesmoke; }
+            93.75% { color: darkred; }
+            95.31% { color: darkcyan; }
+            96.87% { color: darkslateblue; }
+            98.43% { color: darkturquoise; }
+            100% { color: red; }
+        }
+
+        h2, p, input, button {
+            animation: colorChange 30s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Enter Password</h1>
+        <input type="password" id="passwordInput" placeholder="Input Access Password">
+        <button onclick="login()" class="submit">Submit</button>
+        <p id="message"></p>
+    </div>
+    
+    <script>
+        async function login() {
+            let inputPassword = document.getElementById("passwordInput").value;
+
+            // Hash the entered password using SHA-256
+            let hash = await sha256(inputPassword);
+
+            // Stored hashed password (Replace with your actual hashed password)
+            let storedHash = "a3a43f53d97113b8d05519ed5b395b385f47cdcfcc4aab22d049248af9d9e0b8"; // 'password' in SHA-256
+
+            // Compare the hashes
+            if (hash === storedHash) {
+                alert("Login Successful!");
+                window.location.href = "dashboard.html"; // Redirect after login
+            } else {
+                document.getElementById("message").innerText = "Incorrect Password!";
+            }
+        }
+
+        // SHA-256 hashing function
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+        }
+    </script>
+</body>
+</html>
